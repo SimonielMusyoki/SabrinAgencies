@@ -1,0 +1,48 @@
+{% extends 'blog/layout.html' %}
+{% block content %}
+<center><a href="{% url 'property-create' %}"><button class='btn btn-info'>Add New Property</button></a></center>
+<hr/>
+<div class="row">
+    {% for property in properties %}
+      
+        <a href="{% url 'property-detail' property.id %}">
+            <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+                <div class="card card-explore">
+                  <div class="card-explore__img">
+                    <img class="card-img" src="{{ property.Picture1.url }}" alt="">
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-explore__title"><a href="#">Classic Bed Room</a></h4>
+                    <p>Cool mansion located in {{property.City }}, {{ property.County}} County. Address line:  {{property.Address }}</p>
+                    <a class="card-explore__link" href="{% url 'property-detail' property.id %}">View Details -><i class="ti-arrow-right"></i></a>
+                  </div>
+                </div>
+            </div>
+      </a>
+    {% endfor %}
+  </div>
+    {% if is_paginated %}
+
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+    {% endif %}
+{% endblock content %}
+{% block sidebar %}
+{% include 'snippets/sidebar.html' %}
+{% endblock sidebar %}
