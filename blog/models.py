@@ -79,9 +79,6 @@ class Units(models.Model):
     Bathrooms = models.IntegerField(help_text="Number of bathrooms the unit has")
     Status = models.CharField(max_length=10, choices=unit_status)
 
-    def __str__(self):
-        return self.title
-
     def get_absolute_url(self):
         return reverse('units')
 
@@ -93,7 +90,10 @@ class Tenant(models.Model):
     FirstName=models.CharField(max_length=100, help_text="First name")
     LastName=models.CharField(max_length=255,help_text="Last name")
 
-    def __str__(self):
+    def get_absolute_url(self):
+        return reverse('tenants')
+
+    def __str__(self,*args, **kwargs):
         return self.FirstName
 
 
@@ -110,12 +110,17 @@ class Lease(models.Model):
     Active=models.CharField(max_length=3, choices=active_choices)
     Rent = models.DecimalField(help_text="The rent to this unit", decimal_places=2,max_digits=8)
 
+    def get_absolute_url(self):
+        return reverse('lease')
+
 class Payment(models.Model):
     UnitID = models.ForeignKey(Units, on_delete=models.CASCADE)
     LeaseID = models.ForeignKey(Lease, on_delete=models.CASCADE)
     PaymentAmount = models.DecimalField(decimal_places=2,max_digits=9, help_text="Amount of Money Paid")
     PaymentDate = models.DateTimeField(auto_now_add=True)
 
+    def get_absolute_url(self):
+        return reverse('payments')
 
 class Vendor(models.Model):
     VendorName = models.CharField(max_length=255, help_text="Enter the vendo name")
@@ -123,9 +128,11 @@ class Vendor(models.Model):
     ContactPerson = models.CharField(max_length=255)
     Email = models.EmailField(max_length=25, help_text="Email address")
 
-    def __str__(self):
-        return self.VendorName
+    def get_absolute_url(self):
+        return reverse('vendors')
 
+    def __str__(self,*args, **kwargs):
+        return self.VendorName
 
 class Expense(models.Model):
     expenseTypes = (
@@ -142,3 +149,5 @@ class Expense(models.Model):
     Reciept = models.FileField(upload_to='media/Receipts/', help_text="Picture of the receipt")
     isPaid = models.BooleanField(default=True)
 
+    def get_absolute_url(self):
+        return reverse('expenses')
