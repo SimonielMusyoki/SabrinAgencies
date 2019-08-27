@@ -4,27 +4,21 @@
   <hr/>
     {% for post in posts %}
         <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+       
           <div class="media-body">
             <div class="article-metadata">
-              {% if post.idea %}
-              <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.idea }}</a>
+              {% if post.isPaid %}
+              <small class="text-muted">Status: Paid</small>
+              {% else %}
+              <small class="text-muted">Status: Pending</small>
               {% endif %}
-              <small class="text-muted">Started on: {{ post.date_started|date:"F d, Y" }}</small>
-              <small class="text-muted">Status: {{ post.status }}</small>
             </div>
-            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-            {% if post.idea %}
-            <p class="article-content">{{ post.idea|linebreaks|truncatewords:30 }}
-              <a href="{% url 'project-detail' post.id %}">Read More</a>
+            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.Type }}</a></h2>
+            
+            <p class="article-content">Kshs. {{ post.Cost }} paid to <b>{{ post.VendorID }}</b> for {{ post.Type}} in {{post.UnitID }}
+              <a href="{% url 'expense-detail' post.id %}">Read More</a>
             </p>
-            {% endif %}
-            {% if post.git_link %}
-            <a href="{{ posts.git_link }}" target="_blank"><button class='btn btn-outline-info'>View Project Source code</button></a>
-            {% endif %}
-            {% if post.project_link %}
-            <a href="{{ posts.project_link }}" target="_blank"><button class='btn btn-outline-info'>View Live Project</button></a>
-            {% endif %}
+           
           </div>
         </article>
     {% endfor %}
