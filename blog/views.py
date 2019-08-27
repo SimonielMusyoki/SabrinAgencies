@@ -19,7 +19,7 @@ class PropertiesDetailView(DetailView):
 
 class PropertiesCreateView(LoginRequiredMixin, CreateView):
     model=Properties
-    template_name='property/property_form.html'
+    template_name='property/property_create.html'
     fields = '__all__'
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -101,6 +101,7 @@ class UnitsDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
 
 
 # +================= End of Units Views=====================+
+
 # +================= Start of Tenant Views =================
 class TenantListView(ListView):
     model = Tenant
@@ -116,7 +117,7 @@ class TenantDetailView(DetailView):
 
 class TenantCreateView(CreateView):
     model=Tenant
-    template_name='tenants/tenant_create.html'
+    template_name='tenants/tenant_form.html'
     fields = '__all__'
     def form_valid(self, form):
         return super().form_valid(form)
@@ -128,6 +129,9 @@ class TenantUpdateView(UpdateView):
 
     def form_valid(self, form):
         return super().form_valid(form)
+
+    def test_func(self):
+        return True
 
 class TenantDeleteView(DeleteView):
     model = Tenant
@@ -268,12 +272,12 @@ class VendorCreateView(LoginRequiredMixin, CreateView):
 class VendorUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Vendor
     template_name = 'vendors/vendor_form.html'
-    fields = ['title','content','url']
+    fields = '__all__'
     def form_valid(self, form):
-        form.instance.author = self.request.user
         return super().form_valid(form)
 
     def test_func(self):
+        return True
         post = self.get_object()
         if self.request.user == post.author:
             return True
@@ -311,7 +315,7 @@ class ExpenseDetailView(DetailView):
 
 class ExpenseCreateView(LoginRequiredMixin, CreateView):
     model = Expense
-    template_name = 'expenses/expense_form.html'
+    template_name = 'expenses/expense_create.html'
     fields = '__all__'
     def form_valid(self, form):
         form.instance.author = self.request.user
