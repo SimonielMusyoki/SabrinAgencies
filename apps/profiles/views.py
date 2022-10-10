@@ -68,6 +68,6 @@ class UpdateProfileAPIView(APIView):
             partial=True,
         )
 
-        serializer.is_valid()
+        serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
