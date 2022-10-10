@@ -1,7 +1,8 @@
-from email.policy import default
 import random
 import string
+from email.policy import default
 from tabnanny import verbose
+
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator

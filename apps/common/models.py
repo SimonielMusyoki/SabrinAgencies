@@ -1,6 +1,7 @@
-from email.policy import default
-from django.db import models
 import uuid
+from email.policy import default
+
+from django.db import models
 
 
 class TimeStampedUUIDModel(models.Model):
