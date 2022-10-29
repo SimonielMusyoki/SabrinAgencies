@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
 import Property from "../components/Property";
 import { getProperties, reset } from "../features/properties/propertyslice";
+import Title from "../components/Title";
 
 const PropertiesPage = () => {
   const { properties, isLoading, isError, message } = useSelector(
@@ -25,6 +26,7 @@ const PropertiesPage = () => {
 
   return (
     <>
+      <Title title="Real Estate properties" />
       <Container>
         <Row>
           <Col className="mg-top text-center">
