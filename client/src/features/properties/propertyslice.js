@@ -46,7 +46,8 @@ export const propertySlice = createSlice({
       })
       .addCase(getProperties.rejected, (state, action) => {
         state.isLoading = false;
-        (state.isError = true), (state.message = action.payload);
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });
