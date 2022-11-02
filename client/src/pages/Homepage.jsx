@@ -16,7 +16,7 @@ const Homepage = () => {
                 The one stop shop for all matters properties. Buy, Rent or sell
                 with us!
               </h2>
-              <LinkContainer to={"/properies"}>
+              <LinkContainer to={"/properties"}>
                 <Button variant="primary">Get Started</Button>
               </LinkContainer>
             </div>

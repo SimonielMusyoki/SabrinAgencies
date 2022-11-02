@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import NotFound from "./components/NotFound";
 
 import Homepage from "./pages/Homepage";
+import LoginPage from "./pages/LoginPage";
 import PropertiesPage from "./pages/PropertiesPage";
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/properties" element={<PropertiesPage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <ToastContainer theme="dark" />
