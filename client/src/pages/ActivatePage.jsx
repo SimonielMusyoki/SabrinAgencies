@@ -22,6 +22,7 @@ const ActivatePage = () => {
       toast.error(message);
     }
     if (isSuccess) {
+      toast.success("Your account has been activated, you can login now");
       navigate("/");
     }
     dispatch(reset());
@@ -30,7 +31,6 @@ const ActivatePage = () => {
   const submitHandler = () => {
     const userData = { uid, token };
     dispatch(activate(userData));
-    toast.success("Your account has been activated, you can login now");
   };
 
   return (
